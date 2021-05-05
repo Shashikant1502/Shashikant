@@ -1,0 +1,53 @@
+# Git script by Shashikant Tati
+# version 1.0
+
+
+# first check if git exists
+
+try
+{
+    git | Out-Null
+}
+catch [System.Management.Automation.CommandNotFoundException]
+{
+    Write-Host "Please Install Git" -ForegroundColor Red
+    exit
+}
+
+# create a new folder and go inside it
+
+mkdir "Project"                       # creates folder named project
+cd "Project"                          # changes directory to project
+
+# git actions
+
+git init                              # converts the project to git repo
+
+
+
+New-Item File.js                      # create a basic js file
+
+Set-Content File.js "console.log('Hello World')"      # sets the "" content to File.js
+
+New-Item File2.js                    # create a basic js file
+
+Set-Content File2.js "console.log('My second file')"   
+
+git add File.js                      # adds file.js to git , if multiple file, use git add * 
+git add File2.js
+
+git commit -m "Added File.js"       #-m "Any message" , it saves all added files in git
+
+git remote add origin "https://github.com/Shashikant1502/Shashikant.git"   # this command lets you give a git repo
+
+git remote -v                       # "verifies if the repo is added"
+
+git push origin main                 # pushes all changes to main branch of origin
+
+Set-Content File.js "console.log('Hello World') \n console.log(1+2)"
+git add *
+git commit -m "Added 1 more line File.js"
+
+git push origin main # pushes all changes to main branch of origin
+
+Write-Host "Git Operations Performed" -ForegroundColor Green
